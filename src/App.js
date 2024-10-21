@@ -84,6 +84,11 @@ const App = () => {
           <h3>{amount} {fromCurrency} = {result.toFixed(2)} {toCurrency}</h3>
         </div>
       )}
+
+      {/* Footer */}
+      <footer className="footer">
+        <p>2024 | All Rights Reserved. Designed by <a href="https://www.facebook.com/smugsolutions/" target="_blank" rel="noopener noreferrer">Smug Solutions</a></p>
+      </footer>
     </div>
   );
 };
