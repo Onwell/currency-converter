@@ -11,7 +11,7 @@ const App = () => {
 
   useEffect(() => {
     // Fetch currency data when the component mounts
-    fetch('https://api.exchangerate-api.com/v4/latest/USD')
+    fetch('https://v6.exchangerate-api.com/v6/462bb1695373c413418f492e/latest/USD')
       .then(response => response.json())
       .then(data => {
         setCurrencies([...Object.keys(data.rates)]);
