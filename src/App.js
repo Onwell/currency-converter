@@ -8,19 +8,35 @@ const App = () => {
   const [amount, setAmount] = useState(1);
   const [exchangeRate, setExchangeRate] = useState(1);
   const [result, setResult] = useState(null);
+  const API_KEY = '462bb1695373c413418f492e';
 
+  // Fetch currency data when the component mounts and when currency changes
   useEffect(() => {
-    // Fetch currency data when the component mounts
-    fetch('https://api.exchangerate-api.com/v4/latest/USD')
-      .then(response => response.json())
+    fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${fromCurrency}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch exchange rates');
+        }
+        return response.json();
+      })
       .then(data => {
-        setCurrencies([...Object.keys(data.rates)]);
-        setExchangeRate(data.rates[toCurrency]);
+        setCurrencies([...Object.keys(data.conversion_rates)]);
+        setExchangeRate(data.conversion_rates[toCurrency]);
+      })
+      .catch(error => {
+        console.error('Error fetching exchange rates:', error);
       });
-  }, [toCurrency]);
+  }, [fromCurrency, toCurrency]);
 
   const convertCurrency = () => {
     setResult(amount * exchangeRate);
+  };
+
+  const handleAmountChange = (e) => {
+    const value = e.target.value;
+    if (!isNaN(value)) {
+      setAmount(value);
+    }
   };
 
   return (
@@ -31,7 +47,7 @@ const App = () => {
         <input 
           type="number" 
           value={amount} 
-          onChange={(e) => setAmount(e.target.value)} 
+          onChange={handleAmountChange} 
         />
         
         <select 
