@@ -10,14 +10,23 @@ const App = () => {
   const [result, setResult] = useState(null);
 
   useEffect(() => {
-    // Fetch currency data when the component mounts
-    fetch('https://v6.exchangerate-api.com/v6/462bb1695373c413418f492e/latest/USD')
-      .then(response => response.json())
-      .then(data => {
-        setCurrencies([...Object.keys(data.rates)]);
-        setExchangeRate(data.rates[toCurrency]);
-      });
-  }, [toCurrency]);
+    if (fromCurrency && toCurrency) {
+      fetch(`https://v6.exchangerate-api.com/v6/462bb1695373c413418f492e/latest/${fromCurrency}`)
+        .then(response => response.json())
+        .then(data => {
+          // Check if data and rates are defined
+          if (data && data.rates) {
+            setCurrencies([...Object.keys(data.rates)]);
+            setExchangeRate(data.rates[toCurrency]);
+          } else {
+            console.error('Error fetching data:', data);
+          }
+        })
+        .catch(error => {
+          console.error('Error with the API request:', error);
+        });
+    }
+  }, [fromCurrency, toCurrency]);
 
   const convertCurrency = () => {
     setResult(amount * exchangeRate);
@@ -31,7 +40,7 @@ const App = () => {
         <input 
           type="number" 
           value={amount} 
-          onChange={(e) => setAmount(e.target.value)} 
+          onChange={(e) => setAmount(Number(e.target.value))} 
         />
         
         <select 
@@ -63,7 +72,7 @@ const App = () => {
         </button>
       </div>
 
-      {result && (
+      {result !== null && (
         <div className="result">
           <h3>{amount} {fromCurrency} = {result.toFixed(2)} {toCurrency}</h3>
         </div>
