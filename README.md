@@ -1,6 +1,8 @@
 <h2>Simple Recipe Site</h2>
+A simple website for a recipe
+
 <h3>Screenshot</h3>
-![image](https://github.com/user-attachments/assets/be129265-0147-4b15-a644-90e2c32cd2ab)
+<img src="https://github.com/user-attachments/assets/be129265-0147-4b15-a644-90e2c32cd2ab">
 
 <h3>Built with:</h3>
 <ul>
