@@ -11,7 +11,7 @@ The Currency Converter App is a powerful and user-friendly tool designed to simp
 </ul>
 
 <h3>Demo</h3>
-https://smug-simple-recipe.netlify.app/
+https://smug-currency-converter.netlify.app/
 
 <h3>Find Me:</h3>
 <ul>
