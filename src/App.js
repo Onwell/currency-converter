@@ -108,7 +108,7 @@ const App = () => {
       {/* Footer */}
       <footer className="footer mt-5 text-center">
         <p className="text-muted">
-          2024 | All Rights Reserved. Designed by{' '}
+          2025 | All Rights Reserved. Designed by{' '}
           <a
             href="https://www.facebook.com/smugsolutions/"
             target="_blank"
